@@ -106,6 +106,15 @@ See the [cmake documentation](http://www.cmake.org) for further information on
 using cmake on other platforms.
 
 
+Build for WebAssembly target
+============================
+
+```
+emcmake cmake -H. -Bbuild -DDISABLE_SSE=ON
+cmake --build build
+```
+
+
 Prebuilt binaries
 =================
 
