@@ -102,6 +102,7 @@ if(NOT DISABLE_SIMD)
       check_c_compiler_flag(-mssse3 SUPPORTS_SSSE3)
       check_c_compiler_flag(-msse4.1 SUPPORTS_SSE4_1)
       check_c_compiler_flag(-mavx SUPPORTS_AVX)
+      check_c_compiler_flag(-mavx2 SUPPORTS_AVX2)
     endif()
 
     if(SUPPORTS_SSE4_1)
