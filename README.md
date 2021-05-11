@@ -118,6 +118,11 @@ WebAssembly thread support: add `-DENABLE_THREADS=ON` to `emcmake` options.
 
 To turn off WebAssembly SIMD support add `-DDISABLE_SIMD=ON`
 
+Build using Intel C++ compiler (native code only), add to cmake flags:
+
+```
+-DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc
+```
 
 Prebuilt binaries
 =================
