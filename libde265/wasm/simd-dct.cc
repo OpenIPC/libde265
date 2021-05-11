@@ -28,11 +28,7 @@
 
 #include <emmintrin.h> // SSE2
 #include <tmmintrin.h> // SSSE3
-
-#define HAVE_SSE4_1 1
-#if HAVE_SSE4_1
 #include <smmintrin.h> // SSE4.1
-#endif
 
 
 ALIGNED_16(static const int16_t) transform4x4_luma[8][8] =
@@ -342,7 +338,6 @@ void ff_hevc_transform_skip_8_wasm(uint8_t *_dst, const int16_t *coeffs, ptrdiff
 
 
 
-#if HAVE_SSE4_1
 void ff_hevc_transform_4x4_luma_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
                                            ptrdiff_t _stride) {
 
@@ -494,7 +489,6 @@ void ff_hevc_transform_4x4_luma_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
     //_mm_maskmoveu_si128(m128iTmp1, m128iTmp2, (char*) dst);
     *((uint32_t*)(dst)) = _mm_cvtsi128_si32(m128iTmp1);
 }
-#endif // SSE4.1
 
 #if 0
 void ff_hevc_transform_4x4_luma_add_10_wasm(uint8_t *_dst, const int16_t *coeffs,
@@ -623,7 +617,6 @@ void ff_hevc_transform_4x4_luma_add_10_wasm(uint8_t *_dst, const int16_t *coeffs
 #endif
 
 
-#if HAVE_SSE4_1
 void ff_hevc_transform_4x4_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
         ptrdiff_t _stride) {
     uint8_t shift_2nd = 12; // 20 - Bit depth
@@ -742,7 +735,6 @@ void ff_hevc_transform_4x4_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
     //_mm_maskmoveu_si128(m128iTmp1, m128iTmp2, (char*) dst);
     *((uint32_t*)(dst)) = _mm_cvtsi128_si32(m128iTmp1);
 }
-#endif
 
 #if 0
 void ff_hevc_transform_4x4_add_10_wasm(uint8_t *_dst, const int16_t *coeffs,
@@ -839,7 +831,6 @@ void ff_hevc_transform_4x4_add_10_wasm(uint8_t *_dst, const int16_t *coeffs,
 }
 #endif
 
-#if HAVE_SSE4_1
 void ff_hevc_transform_8x8_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
         ptrdiff_t _stride) {
     uint8_t shift_2nd = 12; // 20 - Bit depth
@@ -1172,7 +1163,6 @@ void ff_hevc_transform_8x8_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
     dst += stride;
 
 }
-#endif
 
 #if 0
 void ff_hevc_transform_8x8_add_10_wasm(uint8_t *_dst, const int16_t *coeffs,
@@ -1489,7 +1479,6 @@ void ff_hevc_transform_8x8_add_10_wasm(uint8_t *_dst, const int16_t *coeffs,
 #endif
 
 
-#if HAVE_SSE4_1
 void ff_hevc_transform_16x16_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
         ptrdiff_t _stride) {
     uint8_t shift_2nd = 12; // 20 - Bit depth
@@ -2243,7 +2232,6 @@ void ff_hevc_transform_16x16_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
         }
     }
 }
-#endif
 
 
 #if 0
@@ -2909,7 +2897,6 @@ void ff_hevc_transform_16x16_add_10_wasm(uint8_t *_dst, const int16_t *coeffs,
 #endif
 
 
-#if HAVE_SSE4_1
 void ff_hevc_transform_32x32_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
         ptrdiff_t _stride) {
     uint8_t shift_2nd = 12; // 20 - Bit depth
@@ -5198,7 +5185,6 @@ void ff_hevc_transform_32x32_add_8_wasm(uint8_t *_dst, const int16_t *coeffs,
         }
     }
 }
-#endif
 
 
 #if 0
