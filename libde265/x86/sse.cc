@@ -30,12 +30,15 @@
 #include "config.h"
 #endif
 
+#ifndef WASM_SIMD
 #ifdef __GNUC__
 #include <cpuid.h>
+#endif
 #endif
 
 void init_acceleration_functions_sse(struct acceleration_functions* accel)
 {
+#ifndef WASM_SIMD
   uint32_t ecx=0,edx=0;
 
 #ifdef _MSC_VER
@@ -50,7 +53,7 @@ void init_acceleration_functions_sse(struct acceleration_functions* accel)
   uint32_t eax,ebx;
   __get_cpuid(1, &eax,&ebx,&ecx,&edx);
 #endif
-  
+
   // printf("CPUID EAX=1 -> ECX=%x EDX=%x\n", regs[2], regs[3]);
 
   //int have_MMX    = !!(edx & (1<<23));
@@ -58,6 +61,10 @@ void init_acceleration_functions_sse(struct acceleration_functions* accel)
   int have_SSE4_1 = !!(ecx & (1<<19));
 
   // printf("MMX:%d SSE:%d SSE4_1:%d\n",have_MMX,have_SSE,have_SSE4_1);
+#else
+  int have_SSE    = 1;
+  int have_SSE4_1 = 0;
+#endif
 
   if (have_SSE) {
   }

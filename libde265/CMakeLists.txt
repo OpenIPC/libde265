@@ -89,15 +89,20 @@ add_definitions(-DLIBDE265_EXPORTS)
 add_subdirectory (encoder)
 
 if(NOT DISABLE_SSE)
-  if (MSVC)
+  if (WASM_SIMD)
+    # https://emscripten.org/docs/porting/simd.html
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msimd128 -msse")
+    add_subdirectory(x86)
+    add_subdirectory(wasm)
+  elseif (MSVC)
     set(SUPPORTS_SSE2 1)
     set(SUPPORTS_SSSE3 1)
     set(SUPPORTS_SSE4_1 1)
-  else (MSVC)
+  else()
     check_c_compiler_flag(-msse2 SUPPORTS_SSE2)
     check_c_compiler_flag(-mssse3 SUPPORTS_SSSE3)
     check_c_compiler_flag(-msse4.1 SUPPORTS_SSE4_1)
-  endif (MSVC)
+  endif()
 
   if(SUPPORTS_SSE4_1)
     add_definitions(-DHAVE_SSE4_1)
@@ -107,11 +112,8 @@ if(NOT DISABLE_SSE)
   endif()
 endif()
 
-if (WASM_SIMD)
-  add_subdirectory(wasm)
-endif()
-
-add_library(${PROJECT_NAME} ${libde265_sources} ${ENCODER_OBJECTS} ${X86_OBJECTS})
+add_library(${PROJECT_NAME} ${libde265_sources} ${ENCODER_OBJECTS}
+    ${X86_OBJECTS} ${WASM_OBJECTS})
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
 write_basic_package_version_file(${PROJECT_NAME}ConfigVersion.cmake COMPATIBILITY ExactVersion)
