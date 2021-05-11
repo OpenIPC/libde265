@@ -110,9 +110,11 @@ Build for WebAssembly target
 ============================
 
 ```
-emcmake cmake -H. -Bbuild -DDISABLE_SSE=ON
+emcmake cmake -H. -Bbuild
 cmake --build build
 ```
+
+WebAssembly thread support: add `-DENABLE_THREADS=ON` to `emcmake` options.
 
 
 Prebuilt binaries
