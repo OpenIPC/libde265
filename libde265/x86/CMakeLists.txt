@@ -26,7 +26,11 @@ if(NOT MSVC)
   endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
 endif()
 
-if(NOT MSVC)
+aif(MSVC)
+  set(avx_flags "${avx_flags} /arch:AVX")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+  set(avx_flags "${avx_flags} /QxAVX")
+else()
   set(avx_flags "${avx_flags} -mavx")
 endif()
 
