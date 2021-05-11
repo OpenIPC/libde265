@@ -67,6 +67,11 @@ else()
   if (ENABLE_THREADS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_PTHREADS=1")
   endif()
+
+  option(WASM_SIMD "Turn on SIMD support for WASM" OFF)
+  if (WASM_SIMD)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msimd128")
+  endif()
 endif()
 
 option(BUILD_SHARED_LIBS "Build shared library" ON)

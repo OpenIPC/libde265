@@ -44,6 +44,10 @@
 #include "arm/arm.h"
 #endif
 
+#ifdef WASM_SIMD
+#include "wasm/simd.h"
+#endif
+
 #define SAVE_INTERMEDIATE_IMAGES 0
 
 #if SAVE_INTERMEDIATE_IMAGES
@@ -450,6 +454,11 @@ void base_context::set_acceleration_functions(enum de265_acceleration l)
   }
 #endif
 }
+#ifdef WASM_SIMD
+  if (l>=de265_acceleration_WASM) {
+    init_acceleration_functions_wasm(&acceleration);
+  }
+#endif
 
 
 void decoder_context::init_thread_context(thread_context* tctx)

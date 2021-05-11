@@ -107,6 +107,10 @@ if(NOT DISABLE_SSE)
   endif()
 endif()
 
+if (WASM_SIMD)
+  add_subdirectory(wasm)
+endif()
+
 add_library(${PROJECT_NAME} ${libde265_sources} ${ENCODER_OBJECTS} ${X86_OBJECTS})
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
