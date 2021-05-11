@@ -11,6 +11,7 @@ function build {
 }
 
 set -e
-build "cmake"
-build "emcmake cmake -DWASM_SIMD=ON"
-build "emcmake cmake -DWASM_SIMD=OFF"
+build "cmake -DDISABLE_SIMD=ON"
+build "cmake -DDISABLE_SIMD=OFF"
+build "emcmake cmake -DDISABLE_SIMD=ON"
+build "emcmake cmake -DDISABLE_SIMD=OFF"

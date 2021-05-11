@@ -116,7 +116,7 @@ cmake --build build
 
 WebAssembly thread support: add `-DENABLE_THREADS=ON` to `emcmake` options.
 
-WebAssembly SIMD support: add `-DWASM_SIMD=ON`
+To turn off WebAssembly SIMD support add `-DDISABLE_SIMD=ON`
 
 
 Prebuilt binaries

@@ -1,8 +1,8 @@
-set (x86_sources 
+set (x86_sources
   sse.cc sse.h
 )
 
-set (x86_sse_sources 
+set (x86_sse_sources
   sse-motion.cc sse-motion.h sse-dct.h sse-dct.cc
 )
 
