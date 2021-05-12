@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.3.2)
+cmake_minimum_required (VERSION 3.15)
 
 project (libde265
     LANGUAGES C CXX
@@ -15,7 +15,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -flto")
 
 # The version number.
 set (NUMERIC_VERSION 0x01000800)
@@ -86,5 +86,9 @@ if(MSVC)
 endif()
 
 add_subdirectory (libde265)
-add_subdirectory (dec265)
-add_subdirectory (enc265)
+
+option(DISABLE_TOOLS "Don't build dec265 and enc265" ON)
+if (NOT DISABLE_TOOLS)
+  add_subdirectory (dec265)
+  add_subdirectory (enc265)
+endif()
