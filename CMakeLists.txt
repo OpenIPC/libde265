@@ -15,7 +15,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -flto")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -flto -fno-exceptions")
 
 # The version number.
 set (NUMERIC_VERSION 0x01000800)
